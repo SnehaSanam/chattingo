@@ -3,20 +3,39 @@ services:
     image: mysql:8.0
     container_name: mysql
     restart: always
-    env_file:
-      - /root/chattingo/backend/.env
+    environment:
+      -  MYSQL_ROOT_PASSWORD=password
+      -  MYSQL_DATABASE=chattingo_db
     ports:
       - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - chat-network
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
+      timeout: 20s
+      retries: 10
+
+  backend:
+    image: snehasanam/chattingo-backend:latest
+    container_name: chattingo-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+       mysql:
+         condition: service_healthy
+    env_file:
+      - ./backend/.env
+    networks:
+      - chat-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
+      interval: 30s
+      timeout: 10s
       retries: 3
-      start_period: 30s
+
 
   frontend:
     image: snehasanam/chattingo-frontend:latest
@@ -31,18 +50,6 @@ services:
     networks:
       - chat-network
     
-
-  backend:
-    image: snehasanam/chattingo-backend:latest
-    container_name: chattingo-backend
-    ports:
-      - "8080:8080"
-    depends_on:
-      - mysql
-    env_file:
-      - /root/chattingo/backend/.env
-    networks:
-      - chat-network
 
 networks:
   chat-network:
