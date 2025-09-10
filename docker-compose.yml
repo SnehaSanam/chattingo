@@ -1,0 +1,52 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    env_file:
+      - /root/chattingo/backend/.env
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - chat-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  frontend:
+    image: snehasanam/chattingo-frontend:latest
+    container_name: chattingo-frontend
+    restart: always
+    ports:
+      - "3000:80"
+    env_file:
+      - /root/chattingo/frontend/.env
+    depends_on:
+      - backend
+    networks:
+      - chat-network
+    
+
+  backend:
+    image: snehasanam/chattingo-backend:latest
+    container_name: chattingo-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    env_file:
+      - /root/chattingo/backend/.env
+    networks:
+      - chat-network
+
+networks:
+  chat-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
