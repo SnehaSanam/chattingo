@@ -37,8 +37,8 @@ pipeline {
                 docker push $DOCKER_HUB_USER/${BACKEND_IMAGE}:${DOCKER_TAG}
                 """
             }
-        }      
-
+        }    
+    }  
         stage('Deploy with Docker Compose') {
             steps {
                 script {
@@ -77,4 +77,3 @@ pipeline {
         }
     }
  }         
-}
