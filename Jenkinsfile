@@ -52,7 +52,7 @@ pipeline {
                     ]) {
                         sh '''
                             # Export runtime secrets for docker compose
-                            export JWT_SECRET="${J_JWT_SECRET}"
+                            export JWT_SECRET="${jwt-secret}"
                             export SPRING_DATASOURCE_PASSWORD="${J_SPRING_DB_PWD}"
                             export SPRING_DATASOURCE_USERNAME="root"
                             export SPRING_DATASOURCE_URL="jdbc:mysql://mysql:3306/chattingo_db?createDatabaseIfNotExist=true
