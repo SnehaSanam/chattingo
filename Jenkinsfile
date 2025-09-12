@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Git Clone') {
             steps {
-                sh 'git clone https://github.com/SnehaSanam/chattingo.git', branch: 'main'
+                git branch: 'main', url: 'https://github.com/SnehaSanam/chattingo.git'
             }
         }
         stage('Build Docker Images') {
