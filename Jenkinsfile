@@ -44,7 +44,7 @@ pipeline {
                 script {
                     withCredentials([
                         string(credentialsId: 'SPRING_DATASOURCE_PASSWORD', variable: 'J_SPRING_DB_PWD'),
-                        string(credentialsId: 'JWT_SECRET',                variable: 'J_JWT_SECRET'),
+                        string(credentialsId: 'jwt_secret',                variable: 'J_JWT_SECRET'),
                         string(credentialsId: 'mysql-root-password',       variable: 'J_MYSQL_ROOT_PWD'),
                         string(credentialsId: 'SPRING_PROFILES_ACTIVE',     variable: 'J_PROFILES'),
                         string(credentialsId: 'SERVER_PORT',                variable: 'J_SERVER_PORT'),
