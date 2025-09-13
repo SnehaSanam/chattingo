@@ -55,7 +55,7 @@ pipeline {
                             export JWT_SECRET="${J_JWT_SECRET}"
                             export SPRING_DATASOURCE_PASSWORD="${J_SPRING_DB_PWD}"
                             export SPRING_DATASOURCE_USERNAME="root"
-                            export SPRING_DATASOURCE_URL="jdbc:mysql://mysql:3306/chattingo_db?createDatabaseIfNotExist=true
+                            export SPRING_DATASOURCE_URL="jdbc:mysql://mysql:3306/chattingo_db?createDatabaseIfNotExist=true"
                             export SPRING_PROFILES_ACTIVE="${J_PROFILES}"
                             export SERVER_PORT="${J_SERVER_PORT}"
                             export WEBSOCKET_ENDPOINT="${J_WS_EP}"
