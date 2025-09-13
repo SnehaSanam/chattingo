@@ -34,11 +34,7 @@ pipeline {
                         echo "Credential ID not found!"
                         error e.toString()
                       }
-                }
-          }
-    }
-  }
-}
+             }
 
         stage('Push to Docker Hub') {
             steps {
