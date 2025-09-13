@@ -22,6 +22,24 @@ pipeline {
                 """
             }
         }
+        
+        stage('Debug') {
+            steps {
+                script {
+                  try {
+                    withCredentials([string(credentialsId: 'mysql-root-password', variable: 'MY_PWD')]) {
+                    sh 'echo "MySQL password is set (masked)"'
+                }
+                } catch (e) {
+                        echo "Credential ID not found!"
+                        error e.toString()
+                      }
+                }
+          }
+    }
+  }
+}
+
         stage('Push to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(
