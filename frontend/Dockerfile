@@ -21,6 +21,9 @@ COPY .env.production .env
 #Copy installed node_modules from deps stage
 COPY --from=deps /app/node_modules ./node_modules
 
+## Copy .env created by jenkins to environment file (so Docker rebuilds when env changes)
+COPY .env.production .env
+
 #Copy all frontend source code
 COPY . . 
 
