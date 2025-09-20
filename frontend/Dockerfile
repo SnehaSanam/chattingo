@@ -18,6 +18,10 @@ WORKDIR /app
 #Copy installed node_modules from deps stage
 COPY --from=deps /app/node_modules ./node_modules
 
+# Copy environment file first (so Docker rebuilds when env changes)
+COPY .env.production .env
+
+
 #Copy all frontend source code
 COPY . . 
 
