@@ -62,7 +62,8 @@ services:
       - backend
     networks:
       - chat-network
-    
+    volumes:
+      - etc/letsencrypt:/etc/letsencrypt:ro    
         # nginx:
     # image: nginx:alpine
       # container_name: nginx-proxy
