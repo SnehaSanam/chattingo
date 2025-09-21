@@ -61,9 +61,7 @@ services:
     depends_on:
       - backend
     networks:
-      - chat-network
-    volumes:
-      - etc/letsencrypt:/etc/letsencrypt:ro    
+      - chat-network    
         # nginx:
     # image: nginx:alpine
       # container_name: nginx-proxy
